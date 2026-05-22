@@ -121,6 +121,6 @@ internal sealed class ModbusTcpAddressProvider : IAddressProvider
 ]
 """;
 
-        return JsonUtils.Deserialize<List<Channel>>(json) ?? [];
+        return JsonHelper.Deserialize<List<Channel>>(json) ?? [];
     }
 }

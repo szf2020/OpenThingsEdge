@@ -64,14 +64,14 @@ public static partial class PayloadDataExtensions
         var array = payload.IsArray();
         return payload.DataType switch
         {
-            TagDataType.Bit => !array ? [payload.GetBit().ToString()] : payload.GetBitArray().Select(s => s.ToString()).ToArray(),
-            TagDataType.Byte => !array ? [payload.GetByte().ToString()] : payload.GetByteArray().Select(s => s.ToString()).ToArray(),
-            TagDataType.Word => !array ? [payload.GetWord().ToString()] : payload.GetWordArray().Select(s => s.ToString()).ToArray(),
-            TagDataType.DWord => !array ? [payload.GetDWord().ToString()] : payload.GetDWordArray().Select(s => s.ToString()).ToArray(),
-            TagDataType.Int => !array ? [payload.GetInt().ToString()] : payload.GetIntArray().Select(s => s.ToString()).ToArray(),
-            TagDataType.DInt => !array ? [payload.GetDInt().ToString()] : payload.GetDIntArray().Select(s => s.ToString()).ToArray(),
-            TagDataType.Real => !array ? [payload.GetReal().ToString()] : payload.GetRealArray().Select(s => s.ToString()).ToArray(),
-            TagDataType.LReal => !array ? [payload.GetLReal().ToString()] : payload.GetLRealArray().Select(s => s.ToString()).ToArray(),
+            TagDataType.Bit => !array ? [payload.GetBit().ToString()] : [.. payload.GetBitArray().Select(s => s.ToString())],
+            TagDataType.Byte => !array ? [payload.GetByte().ToString()] : [.. payload.GetByteArray().Select(s => s.ToString())],
+            TagDataType.Word => !array ? [payload.GetWord().ToString()] : [.. payload.GetWordArray().Select(s => s.ToString())],
+            TagDataType.DWord => !array ? [payload.GetDWord().ToString()] : [.. payload.GetDWordArray().Select(s => s.ToString())],
+            TagDataType.Int => !array ? [payload.GetInt().ToString()] : [.. payload.GetIntArray().Select(s => s.ToString())],
+            TagDataType.DInt => !array ? [payload.GetDInt().ToString()] : [.. payload.GetDIntArray().Select(s => s.ToString())],
+            TagDataType.Real => !array ? [payload.GetReal().ToString()] : [.. payload.GetRealArray().Select(s => s.ToString())],
+            TagDataType.LReal => !array ? [payload.GetLReal().ToString()] : [.. payload.GetLRealArray().Select(s => s.ToString())],
             _ => throw new FormatException(),
         };
     }
@@ -100,7 +100,7 @@ public static partial class PayloadDataExtensions
     /// <exception cref="FormatException"></exception>
     public static Bit GetBit(this PayloadData payload)
     {
-        if (payload.DataType != TagDataType.Bit)
+        if (payload.DataType is not TagDataType.Bit)
         {
             throw new FormatException();
         }
@@ -116,7 +116,7 @@ public static partial class PayloadDataExtensions
     /// <exception cref="FormatException"></exception>
     public static byte GetByte(this PayloadData payload)
     {
-        if (payload.DataType != TagDataType.Byte)
+        if (payload.DataType is not TagDataType.Byte)
         {
             throw new FormatException();
         }
@@ -132,7 +132,7 @@ public static partial class PayloadDataExtensions
     /// <exception cref="FormatException"></exception>
     public static Word GetWord(this PayloadData payload)
     {
-        if (payload.DataType != TagDataType.Word)
+        if (payload.DataType is not TagDataType.Word)
         {
             throw new FormatException();
         }
@@ -148,7 +148,7 @@ public static partial class PayloadDataExtensions
     /// <exception cref="FormatException"></exception>
     public static DWord GetDWord(this PayloadData payload)
     {
-        if (payload.DataType != TagDataType.DWord)
+        if (payload.DataType is not TagDataType.DWord)
         {
             throw new FormatException();
         }
@@ -164,7 +164,7 @@ public static partial class PayloadDataExtensions
     /// <exception cref="FormatException"></exception>
     public static Int GetInt(this PayloadData payload)
     {
-        if (payload.DataType != TagDataType.Int)
+        if (payload.DataType is not TagDataType.Int)
         {
             throw new FormatException();
         }
@@ -180,7 +180,7 @@ public static partial class PayloadDataExtensions
     /// <exception cref="FormatException"></exception>
     public static DInt GetDInt(this PayloadData payload)
     {
-        if (payload.DataType != TagDataType.DInt)
+        if (payload.DataType is not TagDataType.DInt)
         {
             throw new FormatException();
         }
@@ -196,7 +196,7 @@ public static partial class PayloadDataExtensions
     /// <exception cref="FormatException"></exception>
     public static Real GetReal(this PayloadData payload)
     {
-        if (payload.DataType != TagDataType.Real)
+        if (payload.DataType is not TagDataType.Real)
         {
             throw new FormatException();
         }
@@ -212,7 +212,7 @@ public static partial class PayloadDataExtensions
     /// <exception cref="FormatException"></exception>
     public static LReal GetLReal(this PayloadData payload)
     {
-        if (payload.DataType != TagDataType.LReal)
+        if (payload.DataType is not TagDataType.LReal)
         {
             throw new FormatException();
         }
@@ -228,7 +228,7 @@ public static partial class PayloadDataExtensions
     /// <exception cref="FormatException"></exception>
     public static Bit[] GetBitArray(this PayloadData payload)
     {
-        if (payload.DataType != TagDataType.Bit)
+        if (payload.DataType is not TagDataType.Bit)
         {
             throw new FormatException();
         }
@@ -244,7 +244,7 @@ public static partial class PayloadDataExtensions
     /// <exception cref="FormatException"></exception>
     public static byte[] GetByteArray(this PayloadData payload)
     {
-        if (payload.DataType != TagDataType.Byte)
+        if (payload.DataType is not TagDataType.Byte)
         {
             throw new FormatException();
         }
@@ -260,7 +260,7 @@ public static partial class PayloadDataExtensions
     /// <exception cref="FormatException"></exception>
     public static Word[] GetWordArray(this PayloadData payload)
     {
-        if (payload.DataType != TagDataType.Word)
+        if (payload.DataType is not TagDataType.Word)
         {
             throw new FormatException();
         }
@@ -276,7 +276,7 @@ public static partial class PayloadDataExtensions
     /// <exception cref="FormatException"></exception>
     public static DWord[] GetDWordArray(this PayloadData payload)
     {
-        if (payload.DataType != TagDataType.DWord)
+        if (payload.DataType is not TagDataType.DWord)
         {
             throw new FormatException();
         }
@@ -292,7 +292,7 @@ public static partial class PayloadDataExtensions
     /// <exception cref="FormatException"></exception>
     public static Int[] GetIntArray(this PayloadData payload)
     {
-        if (payload.DataType != TagDataType.Int)
+        if (payload.DataType is not TagDataType.Int)
         {
             throw new FormatException();
         }
@@ -308,7 +308,7 @@ public static partial class PayloadDataExtensions
     /// <exception cref="FormatException"></exception>
     public static DInt[] GetDIntArray(this PayloadData payload)
     {
-        if (payload.DataType != TagDataType.DInt)
+        if (payload.DataType is not TagDataType.DInt)
         {
             throw new FormatException();
         }
@@ -324,7 +324,7 @@ public static partial class PayloadDataExtensions
     /// <exception cref="FormatException"></exception>
     public static Real[] GetRealArray(this PayloadData payload)
     {
-        if (payload.DataType != TagDataType.Real)
+        if (payload.DataType is not TagDataType.Real)
         {
             throw new FormatException();
         }
@@ -340,7 +340,7 @@ public static partial class PayloadDataExtensions
     /// <exception cref="FormatException"></exception>
     public static LReal[] GetLRealArray(this PayloadData payload)
     {
-        if (payload.DataType != TagDataType.LReal)
+        if (payload.DataType is not TagDataType.LReal)
         {
             throw new FormatException();
         }

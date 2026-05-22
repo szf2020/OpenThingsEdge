@@ -130,7 +130,7 @@ internal sealed class CurveStorage(CurveContainer curveContainer, IOptions<Excha
         var rootDir = LocalRootDirectory();
         var (relativeDir, fileName) = BuildRelativeFilePath(model);
         var dir = Path.Combine(rootDir, relativeDir);
-        DirectoryUtils.CreateIfNotExists(dir);
+        DirectoryHelper.CreateIfNotExists(dir);
 
         return (Path.Combine(dir, fileName), Path.Combine(relativeDir, fileName));
     }
@@ -203,7 +203,7 @@ internal sealed class CurveStorage(CurveContainer curveContainer, IOptions<Excha
 
             var destFileName = Path.Combine(remoteDir, relativeFilePath);
             var dir2 = Path.GetDirectoryName(destFileName);
-            DirectoryUtils.CreateIfNotExists(dir2!); // 创建目录时，相对路径会转换为绝对路径
+            DirectoryHelper.CreateIfNotExists(dir2!); // 创建目录时，相对路径会转换为绝对路径
 
             // 可根据返回的文件路径做其他处理，如推送到远程服务器。
             File.Copy(filePath, destFileName);

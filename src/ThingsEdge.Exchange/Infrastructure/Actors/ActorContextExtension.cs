@@ -19,12 +19,10 @@ public static class ActorContextExtension
         /// <remarks>
         /// 前提：Context 隶属于的 ActorSystem 在创建时需要附加 IServiceProvider。
         /// </remarks>
-        public PID SpawnFor<TActor>(IEnumerable<object>? args = null)
+        public PID SpawnFor<TActor>(object[]? args = null)
             where TActor : IActor
         {
-            var props = args != null
-               ? context.System.DI().PropsFor<TActor>(args)
-               : context.System.DI().PropsFor<TActor>();
+            var props = context.System.DI().PropsFor<TActor>(args ?? []);
             return context.Spawn(props);
         }
 
@@ -38,12 +36,10 @@ public static class ActorContextExtension
         /// <remarks>
         /// 前提：Context 隶属于的 ActorSystem 在创建时需要附加 IServiceProvider。
         /// </remarks>
-        public PID SpawnFor<TActor>(Action<Props> propsHandler, IEnumerable<object>? args = null)
+        public PID SpawnFor<TActor>(Action<Props> propsHandler, object[]? args = null)
             where TActor : IActor
         {
-            var props = args != null
-               ? context.System.DI().PropsFor<TActor>(args)
-               : context.System.DI().PropsFor<TActor>();
+            var props = context.System.DI().PropsFor<TActor>(args ?? []);
             propsHandler.Invoke(props);
             return context.Spawn(props);
         }
@@ -59,12 +55,10 @@ public static class ActorContextExtension
         /// <remarks>
         /// 前提：Context 隶属于的 ActorSystem 在创建时需要附加 IServiceProvider。
         /// </remarks>
-        public PID SpawnFor<TActor>(string name, Action<Props>? propsHandler = null, IEnumerable<object>? args = null)
+        public PID SpawnFor<TActor>(string name, Action<Props>? propsHandler = null, object[]? args = null)
             where TActor : IActor
         {
-            var props = args != null
-                ? context.System.DI().PropsFor<TActor>(args)
-                : context.System.DI().PropsFor<TActor>();
+            var props = context.System.DI().PropsFor<TActor>(args ?? []);
             propsHandler?.Invoke(props);
             return context.SpawnNamed(props, name);
         }
@@ -79,6 +73,15 @@ public static class ActorContextExtension
             {
                 context.Send(pid, message);
             }
+        }
+
+        /// <summary>
+        /// 发布消息
+        /// </summary>
+        /// <param name="message">要发布的消息</param>
+        public void Publish(object message)
+        {
+            context.System.EventStream.Publish(message);
         }
     }
 }

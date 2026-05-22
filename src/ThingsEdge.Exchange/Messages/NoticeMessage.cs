@@ -1,0 +1,20 @@
+using ThingsEdge.Exchange.Contracts.Variables;
+using ThingsEdge.Exchange.Contracts;
+using ThingsEdge.Exchange.Connectors;
+
+namespace ThingsEdge.Exchange.Messages;
+
+/// <summary>
+/// 通知消息。
+/// </summary>
+/// <param name="Connector">连接驱动</param>
+/// <param name="ChannelName">通道名称</param>
+/// <param name="Device">设备信息</param>
+/// <param name="Tag">信号标记</param>
+/// <param name="Self">读取的标记值</param>
+internal sealed record NoticeMessage(
+    IDriverConnector Connector,
+    string ChannelName,
+    Device Device,
+    SignalTag Tag,
+    PayloadData Self) : IMessage;

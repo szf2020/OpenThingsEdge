@@ -1,15 +1,16 @@
 using ThingsEdge.Exchange.Addresses;
+using ThingsEdge.Exchange.Connectors;
 using ThingsEdge.Exchange.Contracts;
 using ThingsEdge.Exchange.Contracts.Variables;
-using ThingsEdge.Exchange.Engine.Connectors;
-using ThingsEdge.Exchange.Engine.Snapshot;
+using ThingsEdge.Exchange.Snapshot;
 
 namespace ThingsEdge.Exchange.Interfaces.Impls;
 
 /// <summary>
 /// 标记数据读写接口实现类。
 /// </summary>
-internal sealed class TagReaderWriterImpl(ITagDataSnapshot tagDataSnapshot,
+internal sealed class TagReaderWriterImpl(
+    ITagDataSnapshot tagDataSnapshot,
     IAddressFactory deviceFactory,
     IDriverConnectorManager driverConnectorManager) : ITagReaderWriter
 {
@@ -50,7 +51,7 @@ internal sealed class TagReaderWriterImpl(ITagDataSnapshot tagDataSnapshot,
         }
 
         string? deviceId = null;
-        List<Tag> tags = new(tagIds.Length);
+        List<Tag> tags = [with(tagIds.Length)];
         foreach (var tagId in tagIds)
         {
             var (tag, deviceId0) = GetTagWithDevice(tagId);

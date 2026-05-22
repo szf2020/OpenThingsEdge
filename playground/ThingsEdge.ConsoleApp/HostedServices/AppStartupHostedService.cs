@@ -1,5 +1,5 @@
 using ThingsEdge.ConsoleApp.Configuration;
-using ThingsEdge.Exchange.Interfaces;
+using ThingsEdge.Exchange;
 
 namespace ThingsEdge.ConsoleApp.HostedServices;
 

@@ -217,9 +217,12 @@ public sealed class SiemensS7Net : DeviceTcpNet
     }
 
     /// <summary>
-    /// 获取当前西门子的PDU的协商长度，该长度指定 PLC 一次可发送多少byte数据，不同型号PLC的值会不一样。
+    /// 获取当前西门子的PDU的协商长度，该长度指定 PLC 一次可发送多少byte数据（正可读取数据通常 PDU - 协议头），不同型号PLC的值会不一样。
     /// </summary>
     /// <remarks>
+    /// 常见的 PDU：
+    /// S7-300 => 240；S7-1200 => 480；S7-1500 => 960；更高版本可达到 1960。
+    /// 
     /// 并不是所有 Siemens S7-1500 都支持 960，使用老版本固件，或为了兼容旧协议栈，或受连接方式影响（VPN、防火墙、NAT等）都有可能导致 PDU 下降，
     /// 同时连接数多时 PLC 会动态降低每个连接的 PDU。
     /// </remarks>

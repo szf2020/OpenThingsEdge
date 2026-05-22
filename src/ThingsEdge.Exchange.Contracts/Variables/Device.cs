@@ -76,7 +76,7 @@ public sealed class Device
     /// </summary>
     /// <param name="flag">标识</param>
     /// <returns></returns>
-    public List<SignalTag> GetAllSignalTags(TagFlag flag)
+    public IReadOnlyCollection<SignalTag> GetAllSignalTags(TagFlag flag)
     {
         return
         [

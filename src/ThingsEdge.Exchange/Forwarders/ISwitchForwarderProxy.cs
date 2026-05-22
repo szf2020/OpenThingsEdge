@@ -1,5 +1,3 @@
-using ThingsEdge.Exchange.Contracts.Variables;
-
 namespace ThingsEdge.Exchange.Forwarders;
 
 /// <summary>

@@ -43,7 +43,7 @@ internal sealed class FileAddressProvider : IAddressProvider
     private List<Channel> GetChannelsFromSingleFile()
     {
         var text = File.ReadAllText(Path.GetFullPath(_tagsPath));
-        return JsonUtils.Deserialize<List<Channel>>(text) ?? [];
+        return JsonHelper.Deserialize<List<Channel>>(text) ?? [];
     }
 
     /// <summary>
@@ -87,7 +87,7 @@ internal sealed class FileAddressProvider : IAddressProvider
 
             // 解析 channelConf
             var text1 = ReadAllText(channelConf);
-            var channel = JsonUtils.Deserialize<Channel>(text1);
+            var channel = JsonHelper.Deserialize<Channel>(text1);
             if (channel is null)
             {
                 continue;
@@ -107,7 +107,7 @@ internal sealed class FileAddressProvider : IAddressProvider
 
                 // 解析 device.conf
                 var text2 = ReadAllText(deviceConf);
-                var device = JsonUtils.Deserialize<Device>(text2);
+                var device = JsonHelper.Deserialize<Device>(text2);
                 if (device is null)
                 {
                     continue;
@@ -119,7 +119,7 @@ internal sealed class FileAddressProvider : IAddressProvider
                 {
                     // 解析 group.conf
                     var text3 = ReadAllText(groupConf);
-                    var tagGroup = JsonUtils.Deserialize<TagGroup>(text3);
+                    var tagGroup = JsonHelper.Deserialize<TagGroup>(text3);
                     if (tagGroup is null)
                     {
                         continue;
